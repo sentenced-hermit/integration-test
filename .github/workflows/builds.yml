@@ -6,12 +6,12 @@ jobs:
   build-courier:
     runs-on: ubuntu-latest
     steps:
-      - uses: ./.github/workflows/build-courier.yml
+      - uses: .github/workflows/build-courier.yml@main
   build-mailroom:
     runs-on: ubuntu-latest
     steps:
-      - uses: ./.github/workflows/build-mailroom.yml
+      - uses: .github/workflows/build-mailroom.yml@main
   build-rapidpro:
     runs-on: ubuntu-latest
     steps:
-      - uses: ./.github/workflows/build-rapidpro.yml
+      - uses: .github/workflows/build-rapidpro.yml@main

@@ -8,11 +8,13 @@ jobs:
     with:
       source-branch: main
       tag-name: latest
+    secrets: inherit
   build-mailroom:
     uses: sentenced-hermit/integration-test/.github/workflows/build-mailroom.yml@main
     with:
       source-branch: main
       tag-name: latest
+    secrets: inherit
   build-rapidpro:
     uses: sentenced-hermit/integration-test/.github/workflows/build-rapidpro.yml@main
     with:
@@ -21,3 +23,4 @@ jobs:
       tag-name: 'latest'
       flow-editor: '1.15.2'
       varnish-backend: 'push'
+    secrets: inherit

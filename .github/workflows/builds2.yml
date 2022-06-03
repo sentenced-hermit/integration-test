@@ -5,7 +5,19 @@ on:
 jobs:
   build-courier:
     uses: sentenced-hermit/integration-test/.github/workflows/build-courier.yml@main
+    with:
+      source-branch: main
+      tag-name: latest
   build-mailroom:
     uses: sentenced-hermit/integration-test/.github/workflows/build-mailroom.yml@main
+    with:
+      source-branch: main
+      tag-name: latest
   build-rapidpro:
     uses: sentenced-hermit/integration-test/.github/workflows/build-rapidpro.yml@main
+    with:
+      source-branch: 'main'
+      rp-apps-branch: 'main'
+      tag-name: 'latest'
+      flow-editor: '1.15.2'
+      varnish-backend: 'push'

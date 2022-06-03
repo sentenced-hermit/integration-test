@@ -11,6 +11,16 @@ on:
         description: 'Tag id(v0.0.1-pre, v0.0.1)'
         required: true
         default: 'latest'
+  workflow_call:
+    inputs:
+      source-branch:
+        required: true
+        default: 'main'
+        type: string
+      tag-name:
+        required: true
+        default: 'latest'
+        type: string
 
 jobs:
   docker:

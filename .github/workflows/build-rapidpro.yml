@@ -22,6 +22,33 @@ on:
         description: 'Name of push/rapidpro kubernetes service (push-production, push-staging, push-develop)'
         required: true
         default: 'push'
+  workflow_call:
+    inputs:
+      source-branch:
+        description: 'Source branch (master, staging, develop, etc.)'
+        required: true
+        default: 'main'
+        type: string
+      rp-apps-branch:
+        description: 'Rapidpro Apps Branch to use:'
+        default: 'main'
+        required: true
+        type: string
+      tag-name:
+        description: 'Tag id (v0.0.1-develop, v0.0.2, etc.)'
+        required: true
+        default: 'latest'
+        type: string
+      flow-editor:
+        description: 'Flow editor versior'
+        required: true
+        default: '1.5.11'
+        type: string
+      varnish-backend:
+        description: 'Name of push/rapidpro kubernetes service (push-production, push-staging, push-develop)'
+        required: true
+        default: 'push'
+        type: string
 jobs:
   docker:
     runs-on: ubuntu-latest

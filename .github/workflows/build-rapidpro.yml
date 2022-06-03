@@ -17,7 +17,7 @@ on:
       flow-editor:
         description: 'Flow editor versior'
         required: true
-        default: '1.5.11'
+        default: '1.15.2'
       varnish-backend:
         description: 'Name of push/rapidpro kubernetes service (push-production, push-staging, push-develop)'
         required: true
@@ -42,7 +42,7 @@ on:
       flow-editor:
         description: 'Flow editor versior'
         required: true
-        default: '1.5.11'
+        default: '1.15.2'
         type: string
       varnish-backend:
         description: 'Name of push/rapidpro kubernetes service (push-production, push-staging, push-develop)'

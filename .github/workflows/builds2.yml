@@ -4,7 +4,7 @@ on:
 
 jobs:
   build-courier:
-    uses:  sentenced-hermit/integration-test/.github/workflows/build-courier.yml@main
+    uses: sentenced-hermit/integration-test/.github/workflows/build-courier.yml@main
   build-mailroom:
     uses: sentenced-hermit/integration-test/.github/workflows/build-mailroom.yml@main
   build-rapidpro:

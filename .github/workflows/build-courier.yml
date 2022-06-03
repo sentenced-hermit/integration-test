@@ -41,7 +41,7 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
       - name: Build and push - Courier Image
         id: docker_build1
-        uses: docker/build-push-action@2
+        uses: docker/build-push-action@v2
         with:
           context: .
           file: docker/Dockerfile

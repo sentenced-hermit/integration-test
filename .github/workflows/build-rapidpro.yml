@@ -1,0 +1,69 @@
+name: Build Rapidpro (push)
+on:
+  workflow_dispatch:
+    inputs:
+      source-branch:
+        description: 'Source branch (master, staging, develop, etc.)'
+        required: true
+        default: 'main'
+      rp-apps-branch:
+        description: 'Rapidpro Apps Branch to use:'
+        default: 'main'
+        required: true
+      tag-name:
+        description: 'Tag id (v0.0.1-develop, v0.0.2, etc.)'
+        required: true
+        default: 'latest'
+      flow-editor:
+        description: 'Flow editor versior'
+        required: true
+        default: '1.5.11'
+      varnish-backend:
+        description: 'Name of push/rapidpro kubernetes service (push-production, push-staging, push-develop)'
+        required: true
+        default: 'push'
+jobs:
+  docker:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the repo
+        uses: actions/checkout@v2
+        with: 
+          repository: Ilhasoft/rapidpro.git
+          ref: ${{github.event.inputs.source-branch}}
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v1
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+      - name: Login to Docker Hub
+        uses: docker/login-action@v2 
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+      - name: Build and push - Rapidpro Image
+        id: docker_build1
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          file: docker/Dockerfile
+          push: true
+          tags: rafael089/rasoro-rp:${{github.event.inputs.tag-name}}
+          no-cache: true
+          build-args: |
+            RAPIDPRO_APPS_GIT_URL=https://github.com/Ilhasoft/rapidpro-apps.git
+            RAPIDPRO_APPS_GIT_BRANCH=${{github.event.inputs.rp-apps-branch}}
+            PROTOBUFFERS_URL=https://github.com/Ilhasoft/weni-protobuffers.git
+            FLOWEDITOR_VERSION=${{github.event.inputs.flow-editor}}
+            FLOWEDITOR_REPO=https://github.com/ilhasoft/floweditor.git
+            FLOWEDITOR_BRANCH=main
+      - name: Build and push - Varnish Image
+        id: docker_build2
+        uses: docker/build-push-action@v2
+        with:
+          context: docker
+          file: docker/Dockerfile.varnish
+          push: true
+          tags: rafael089/rasoro-rp-varnish:${{github.event.inputs.tag-name}}
+          no-cache: true
+          build-args: |
+            BACKEND_ADDRESS=${{github.event.inputs.varnish-backend}}:8000

@@ -1,0 +1,17 @@
+name: Builds
+on:
+  workflow_dispatch:
+
+jobs:
+  build-courier:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: ./.github/workflows/build-courier.yml
+  build-mailroom:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: ./.github/workflows/build-mailroom.yml
+  build-rapidpro:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: ./.github/workflows/build-rapidpro.yml
